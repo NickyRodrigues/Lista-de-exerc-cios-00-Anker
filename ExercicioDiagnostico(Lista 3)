@@ -1,0 +1,122 @@
+Questão 1 - class Veiculo {
+    protected int quantidadeOcupantes;
+    protected int quantidadeRodas;
+    protected float capacidadeMaximaTanque;
+    protected float nivelAtualTanquePercentual;
+    protected float consumoMedio;
+    protected float quilometragemAtual;
+    protected float autonomia;
+
+    public float getQuilometragemAtual() {
+        return quilometragemAtual;
+    }
+
+    public void setQuilometragemAtual(float quilometragemAtual) {
+        this.quilometragemAtual = quilometragemAtual;
+    }
+
+    public float getConsumoMedio() {
+        return consumoMedio;
+    }
+
+    public void setConsumoMedio(float consumoMedio) {
+        this.consumoMedio = consumoMedio;
+    }
+}
+
+class Carro extends Veiculo {
+    private String modelo;
+    private int quantidadePortas;
+
+    public Carro() {
+    }
+
+    public Carro(int quantidadeOcupantes, int quantidadeRodas, float capacidadeMaximaTanque,
+                 float nivelAtualTanquePercentual, float consumoMedio, float quilometragemAtual,
+                 float autonomia, String modelo, int quantidadePortas) {
+        this.quantidadeOcupantes = quantidadeOcupantes;
+        this.quantidadeRodas = quantidadeRodas;
+        this.capacidadeMaximaTanque = capacidadeMaximaTanque;
+        this.nivelAtualTanquePercentual = nivelAtualTanquePercentual;
+        this.consumoMedio = consumoMedio;
+        this.quilometragemAtual = quilometragemAtual;
+        this.autonomia = autonomia;
+        this.modelo = modelo;
+        this.quantidadePortas = quantidadePortas;
+    }
+
+    public float percorrer(float qtdQuilometros) {
+        if (qtdQuilometros > 0) {
+            this.quilometragemAtual += qtdQuilometros;
+            if (this.quilometragemAtual > 999999f) {
+                this.quilometragemAtual = 999999f;
+            }
+        }
+        return this.quilometragemAtual;
+    }
+}
+
+Questão 2 - import java.util.Scanner;
+
+class CorpoCeleste {
+    private double massa;
+    private double densidade;
+    private double posicaoX;
+    private double posicaoY;
+
+    public CorpoCeleste(double massa, double densidade, double posicaoX, double posicaoY) {
+        this.massa = massa;
+        this.densidade = densidade;
+        this.posicaoX = posicaoX;
+        this.posicaoY = posicaoY;
+    }
+
+    public double getMassa() { return massa; }
+    public double getDensidade() { return densidade; }
+    public double getPosicaoX() { return posicaoX; }
+    public double getPosicaoY() { return posicaoY; }
+
+    public double calcularRaio() {
+        double volume = this.massa / this.densidade;
+        return Math.cbrt((3 * volume) / (4 * Math.PI));
+    }
+}
+
+public class Main {
+    public static void main(String[] args) {
+        Scanner scanner = new Scanner(System.in);
+        CorpoCeleste[] corpos = new CorpoCeleste[10];
+
+        for (int i = 0; i < 10; i++) {
+            double m = scanner.nextDouble();
+            double d = scanner.nextDouble();
+            double x = scanner.nextDouble();
+            double y = scanner.nextDouble();
+            corpos[i] = new CorpoCeleste(m, d, x, y);
+        }
+
+        CorpoCeleste maiorMassa = corpos[0];
+        CorpoCeleste maiorRaio = corpos[0];
+        double maiorDistanciaX = -1;
+        CorpoCeleste distante1 = null;
+        CorpoCeleste distante2 = null;
+
+        for (int i = 0; i < corpos.length; i++) {
+            if (corpos[i].getMassa() > maiorMassa.getMassa()) {
+                maiorMassa = corpos[i];
+            }
+            if (corpos[i].calcularRaio() > maiorRaio.calcularRaio()) {
+                maiorRaio = corpos[i];
+            }
+            for (int j = i + 1; j < corpos.length; j++) {
+                double distanciaX = Math.abs(corpos[i].getPosicaoX() - corpos[j].getPosicaoX());
+                if (distanciaX > maiorDistanciaX) {
+                    maiorDistanciaX = distanciaX;
+                    distante1 = corpos[i];
+                    distante2 = corpos[j];
+                }
+            }
+        }
+        scanner.close();
+    }
+}
