@@ -1,1 +1,22 @@
+import java.util.Date;
 
+class Pessoa {
+    String nome;
+}
+
+class Livro {
+    String titulo;
+}
+
+class Emprestimo {
+    Livro livro;
+    Pessoa pessoa;
+    Date dataEmprestimo;
+    Date dataDevolucao;
+}
+
+public class Exercicio21 {
+    public static void main(String[] args) {
+        Emprestimo emprestimo = new Emprestimo();
+    }
+}
