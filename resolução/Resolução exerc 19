@@ -1,1 +1,24 @@
+import java.util.List;
+import java.util.ArrayList;
 
+class Produto {
+    String nome;
+    double preco;
+    int quantidadeEstoque;
+}
+
+class Item {
+    Produto produto;
+    int quantidade;
+}
+
+class Pedido {
+    List<Item> itens = new ArrayList<>();
+    String formaPagamento; 
+}
+
+public class Exercicio19 {
+    public static void main(String[] args) {
+        Pedido pedido = new Pedido();
+    }
+}
