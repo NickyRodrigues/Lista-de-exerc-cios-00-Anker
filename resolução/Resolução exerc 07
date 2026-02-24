@@ -1,1 +1,11 @@
-
+a) A solução correta é A.
+b)
+do {
+    System.out.print("Informe o código: ");
+    codigo = teclado.nextInt();
+    
+    // Adicionando a verificação antes de imprimir
+    if (codigo != -1) {
+        System.out.println("Código: " + codigo);
+    }
+} while (codigo != -1);
