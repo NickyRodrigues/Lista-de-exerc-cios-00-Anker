@@ -1,1 +1,130 @@
+Q1 - 
+public class Veiculo {
+    private int qtdOcupantes;
+    private int qtdRodas;
+    private float capMaximaTanque;
+    private float nivelCombustivelPercentual;
+    private float consumoMedio;
+    private float quilometragemAtual;
 
+    public Veiculo() {
+        this.quilometragemAtual = 0;
+    }
+
+    public float calcularAutonomia() {
+        float litrosNoTanque = (nivelCombustivelPercentual / 100) * capMaximaTanque;
+        return litrosNoTanque * consumoMedio;
+    }
+
+    public float getQuilometragemAtual() {
+        return quilometragemAtual;
+    }
+
+    public void setQuilometragemAtual(float quilometragemAtual) {
+        this.quilometragemAtual = quilometragemAtual;
+    }
+
+    public float getConsumoMedio() {
+        return consumoMedio;
+    }
+
+    public void setConsumoMedio(float consumoMedio) {
+        this.consumoMedio = consumoMedio;
+    }
+
+}
+Continuação...
+public class Carro extends Veiculo {
+    private String modelo;
+    private int qtdPortas;
+
+    public Carro() {
+        super(); 
+    }
+
+    public Carro(String modelo, int qtdPortas, int ocupantes, int rodas, 
+                 float capTanque, float nivelComb, float consumo, float km) {
+        this.modelo = modelo;
+        this.qtdPortas = qtdPortas;
+        this.setConsumoMedio(consumo);
+        this.setQuilometragemAtual(km);
+    }
+
+    public float percorrer(float qtdQuilometros) {
+        float novaKM = this.getQuilometragemAtual() + qtdQuilometros;
+        
+        if (novaKM > 999999.0f) {
+            this.setQuilometragemAtual(999999.0f);
+            System.out.println("Limite do odômetro atingido!");
+        } else {
+            this.setQuilometragemAtual(novaKM);
+        }
+        
+        return this.getQuilometragemAtual();
+    }
+}
+
+Q2
+
+import java.util.Scanner;
+import java.util.ArrayList;
+
+public class CorpoCeleste {
+    private float massa;
+    private float densidade;
+    private float posicaoX;
+    private float posicaoY;
+
+    public CorpoCeleste(float massa, float densidade, float x, float y) {
+        this.massa = massa;
+        this.densidade = densidade;
+        this.posicaoX = x;
+        this.posicaoY = y;
+    }
+
+    public double calcularRaio() {
+        return Math.pow((3 * massa) / (4 * Math.PI * densidade), 1.0/3.0);
+    }
+
+    public float getMassa() { return massa; }
+    public float getPosicaoX() { return posicaoX; }
+}
+
+class SistemaSolar {
+    public static void main(String[] args) {
+        Scanner sc = new Scanner(System.in);
+        CorpoCeleste[] corpos = new CorpoCeleste[10]; // Vetor para 10 corpos
+
+        for (int i = 0; i < 10; i++) {
+            System.out.println("Corpo " + (i+1) + ": Massa, Densidade, X e Y:");
+            corpos[i] = new CorpoCeleste(sc.nextFloat(), sc.nextFloat(), sc.nextFloat(), sc.nextFloat());
+        }
+
+        CorpoCeleste maiorMassa = corpos[0];
+        CorpoCeleste maiorRaio = corpos[0];
+
+        for (CorpoCeleste c : corpos) {
+            if (c.getMassa() > maiorMassa.getMassa()) maiorMassa = c;
+            if (c.calcularRaio() > maiorRaio.calcularRaio()) maiorRaio = c;
+        }
+
+        2. Encontrar os dois mais distantes no eixo X
+        CorpoCeleste c1 = corpos[0], c2 = corpos[1];
+        float maiorDistanciaX = Math.abs(c1.getPosicaoX() - c2.getPosicaoX());
+
+        for (int i = 0; i < corpos.length; i++) {
+            for (int j = i + 1; j < corpos.length; j++) {
+                float dist = Math.abs(corpos[i].getPosicaoX() - corpos[j].getPosicaoX());
+                if (dist > maiorDistanciaX) {
+                    maiorDistanciaX = dist;
+                    c1 = corpos[i];
+                    c2 = corpos[j];
+                }
+            }
+        }
+
+        System.out.println("Maior Massa: " + maiorMassa.getMassa());
+        System.out.println("Maior Raio: " + maiorRaio.calcularRaio());
+        System.out.println("Mais distantes em X: Pos " + c1.getPosicaoX() + " e " + c2.getPosicaoX());
+    }
+}
