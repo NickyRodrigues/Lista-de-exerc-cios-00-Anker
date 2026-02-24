@@ -1,1 +1,35 @@
+import java.util.Scanner;
 
+public class CalculoDesconto {
+    public static void main(String[] args) {
+        Scanner teclado = new Scanner(System.in);
+
+        System.out.print("Nome do produto: ");
+        String nome = teclado.nextLine();
+
+        System.out.print("Preço unitário: ");
+        double preco = teclado.nextDouble();
+
+        System.out.print("Quantidade comprada: ");
+        int qtd = teclado.nextInt();
+
+        double valorTotal = preco * qtd;
+        double desconto = 0;
+
+        // Lógica de descontos
+        if (qtd <= 10) {
+            desconto = 0;
+        } else if (qtd <= 20) {
+            desconto = 0.10; // 10%
+        } else if (qtd <= 50) {
+            desconto = 0.20; // 20%
+        } else {
+            desconto = 0.25; // 25% (acima de 50)
+        }
+
+        double valorFinal = valorTotal * (1 - desconto);
+
+        System.out.println("Produto: " + nome);
+        System.out.printf("Valor total a ser pago: R$ %.2f", valorFinal);
+    }
+}
