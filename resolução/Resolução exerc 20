@@ -1,1 +1,21 @@
+import java.util.List;
+import java.util.ArrayList;
 
+class Contato {
+    String nome;
+    String telefone;
+}
+
+class Agenda {
+    List<Contato> contatos = new ArrayList<>();
+    
+    public void adicionarContato(Contato c) { 
+        contatos.add(c); 
+    }
+}
+
+public class Exercicio20 {
+    public static void main(String[] args) {
+        Agenda agenda = new Agenda();
+    }
+}
