@@ -1,1 +1,44 @@
+abstract class FiguraGeometrica {
+    abstract double calcularArea();
+}
 
+class Quadrado extends FiguraGeometrica {
+    double lado;
+    @Override
+    double calcularArea() { 
+        return lado * lado; 
+    }
+}
+
+class Retangulo extends FiguraGeometrica {
+    double base;
+    double altura;
+    @Override
+    double calcularArea() { 
+        return base * altura; 
+    }
+}
+
+class Triangulo extends FiguraGeometrica {
+    double base;
+    double altura;
+    @Override
+    double calcularArea() { 
+        return (base * altura) / 2; 
+    }
+}
+
+class Circulo extends FiguraGeometrica {
+    double raio;
+    @Override
+    double calcularArea() { 
+        return Math.PI * raio * raio; 
+    }
+}
+
+public class Exercicio23 {
+    public static void main(String[] args) {
+        FiguraGeometrica circulo = new Circulo();
+        FiguraGeometrica quadrado = new Quadrado();
+    }
+}
