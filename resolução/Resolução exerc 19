@@ -1,24 +1,28 @@
-import java.util.List;
-import java.util.ArrayList;
+using System.Collections.Generic;
 
-class Produto {
-    String nome;
+class Produto
+{
+    string nome;
     double preco;
     int quantidadeEstoque;
 }
 
-class Item {
+class Item
+{
     Produto produto;
     int quantidade;
 }
 
-class Pedido {
-    List<Item> itens = new ArrayList<>();
-    String formaPagamento; 
+class Pedido
+{
+    List<Item> itens = new List<Item>();
+    string formaPagamento;
 }
 
-public class Exercicio19 {
-    public static void main(String[] args) {
+public class Exercicio19
+{
+    public static void Main(string[] args)
+    {
         Pedido pedido = new Pedido();
     }
 }
