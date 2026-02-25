@@ -1,12 +1,15 @@
-class Pessoa {
-    String nome;
+class Pessoa
+{
+    string nome;
     int idade;
     Pessoa pai;
     Pessoa mae;
 }
 
-public class Exercicio22 {
-    public static void main(String[] args) {
+public class Exercicio22
+{
+    public static void Main(string[] args)
+    {
         Pessoa filho = new Pessoa();
         filho.pai = new Pessoa();
         filho.mae = new Pessoa();
