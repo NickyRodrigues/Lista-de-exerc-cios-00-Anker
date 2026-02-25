@@ -1,22 +1,23 @@
-import java.util.Scanner;
+using System;
 
-public class Exercicio11 {
-    public static void main(String[] args) {
-        Scanner sc = new Scanner(System.in);
-        int numero = sc.nextInt();
-        double erroMaximo = sc.nextDouble();
+public class Exercicio11
+{
+    public static void Main(string[] args)
+    {
+        int numero = int.Parse(Console.ReadLine());
+        double erroMaximo = double.Parse(Console.ReadLine());
         
         double palpite = numero / 2.0;
         double erroAtual = palpite * palpite - numero;
         if (erroAtual < 0) erroAtual = -erroAtual;
 
-        while (erroAtual > erroMaximo) {
+        while (erroAtual > erroMaximo)
+        {
             palpite = (palpite + numero / palpite) / 2.0;
             erroAtual = palpite * palpite - numero;
             if (erroAtual < 0) erroAtual = -erroAtual;
         }
         
-        System.out.println(palpite);
-        sc.close();
+        Console.WriteLine(palpite);
     }
 }
