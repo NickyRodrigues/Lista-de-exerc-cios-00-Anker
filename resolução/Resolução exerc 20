@@ -1,21 +1,25 @@
-import java.util.List;
-import java.util.ArrayList;
+using System.Collections.Generic;
 
-class Contato {
-    String nome;
-    String telefone;
+class Contato
+{
+    string nome;
+    string telefone;
 }
 
-class Agenda {
-    List<Contato> contatos = new ArrayList<>();
+class Agenda
+{
+    List<Contato> contatos = new List<Contato>();
     
-    public void adicionarContato(Contato c) { 
-        contatos.add(c); 
+    private void AdicionarContato(Contato c)
+    { 
+        contatos.Add(c); 
     }
 }
 
-public class Exercicio20 {
-    public static void main(String[] args) {
+public class Exercicio20
+{
+    public static void Main(string[] args)
+    {
         Agenda agenda = new Agenda();
     }
 }
