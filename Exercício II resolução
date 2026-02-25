@@ -1,144 +1,470 @@
-// Questão 1
-class Veiculo
-{
-    protected int quantidadeOcupantes;
-    protected int quantidadeRodas;
-    protected float capacidadeMaximaTanque;
-    protected float nivelAtualTanquePercentual;
-    protected float consumoMedio;
-    protected float quilometragemAtual;
-    protected float autonomia;
-
-    public float GetQuilometragemAtual()
-    {
-        return quilometragemAtual;
-    }
-
-    public void SetQuilometragemAtual(float quilometragemAtual)
-    {
-        this.quilometragemAtual = quilometragemAtual;
-    }
-
-    public float GetConsumoMedio()
-    {
-        return consumoMedio;
-    }
-
-    public void SetConsumoMedio(float consumoMedio)
-    {
-        this.consumoMedio = consumoMedio;
-    }
-}
-
-class Carro : Veiculo
-{
-    private string modelo;
-    private int quantidadePortas;
-
-    public Carro()
-    {
-    }
-
-    public Carro(int quantidadeOcupantes, int quantidadeRodas, float capacidadeMaximaTanque,
-                 float nivelAtualTanquePercentual, float consumoMedio, float quilometragemAtual,
-                 float autonomia, string modelo, int quantidadePortas)
-    {
-        this.quantidadeOcupantes = quantidadeOcupantes;
-        this.quantidadeRodas = quantidadeRodas;
-        this.capacidadeMaximaTanque = capacidadeMaximaTanque;
-        this.nivelAtualTanquePercentual = nivelAtualTanquePercentual;
-        this.consumoMedio = consumoMedio;
-        this.quilometragemAtual = quilometragemAtual;
-        this.autonomia = autonomia;
-        this.modelo = modelo;
-        this.quantidadePortas = quantidadePortas;
-    }
-
-    public float Percorrer(float qtdQuilometros)
-    {
-        if (qtdQuilometros > 0)
-        {
-            this.quilometragemAtual += qtdQuilometros;
-            if (this.quilometragemAtual > 999999f)
-            {
-                this.quilometragemAtual = 999999f;
-            }
-        }
-        return this.quilometragemAtual;
-    }
-}
-
-// Questão 2
+// Nivel Fácil
 using System;
 
-class CorpoCeleste
+class NivelFacil
 {
-    private double massa;
-    private double densidade;
-    private double posicaoX;
-    private double posicaoY;
-
-    public CorpoCeleste(double massa, double densidade, double posicaoX, double posicaoY)
+    static void Main(string[] args)
     {
-        this.massa = massa;
-        this.densidade = densidade;
-        this.posicaoX = posicaoX;
-        this.posicaoY = posicaoY;
+        // Exercicio 1
+        Exercicio1();
+
+        // Exercicio 2
+        Exercicio2();
+
+        // Exercicio 3
+        Exercicio3();
+
+        // Exercicio 4
+        Exercicio4();
     }
 
-    public double GetMassa() { return massa; }
-    public double GetDensidade() { return densidade; }
-    public double GetPosicaoX() { return posicaoX; }
-    public double GetPosicaoY() { return posicaoY; }
-
-    public double CalcularRaio()
+    static void Exercicio1()
     {
-        double volume = this.massa / this.densidade;
-        return Math.Cbrt((3 * volume) / (4 * Math.PI));
+        for (int i = 1; i <= 100; i++)
+            Console.WriteLine($"{i}: Seu Nome Aqui");
+    }
+
+    static void Exercicio2()
+    {
+        for (int i = 2; i <= 100; i += 2)
+            Console.Write(i + " ");
+        Console.WriteLine();
+    }
+
+    static void Exercicio3()
+    {
+        for (int i = 1; i <= 4; i++)
+            Console.WriteLine(new string('*', i));
+    }
+
+    static void Exercicio4()
+    {
+        long a = 0, b = 1;
+        Console.Write(a + " " + b);
+        for (int i = 2; i < 30; i++)
+        {
+            long prox = a + b;
+            Console.Write(" " + prox);
+            a = b;
+            b = prox;
+        }
+        Console.WriteLine();
     }
 }
 
-public class Program
+
+
+// Nivel Médio
+using System;
+
+// Exercicio 1
+class Retangulo
 {
-    public static void Main(string[] args)
+    double _base;
+    double _altura;
+
+    internal Retangulo(double b, double h)
     {
-        CorpoCeleste[] corpos = new CorpoCeleste[10];
+        _base = b;
+        _altura = h;
+    }
+
+    internal double Area => _base * _altura;
+
+    internal void ExibirDados()
+    {
+        Console.WriteLine($"Base: {_base}");
+        Console.WriteLine($"Altura: {_altura}");
+        Console.WriteLine($"Área: {Area}");
+    }
+}
+
+// Exercicio 2
+class Ponto
+{
+    double _x;
+    double _y;
+
+    internal Ponto()
+    {
+        _x = 0;
+        _y = 0;
+    }
+
+    internal Ponto(double x, double y)
+    {
+        _x = x;
+        _y = y;
+    }
+
+    internal Ponto(Ponto outro)
+    {
+        _x = outro._x;
+        _y = outro._y;
+    }
+
+    internal void Exibir() => Console.WriteLine($"Ponto({_x}, {_y})");
+}
+
+// Exercicio 3
+class Pessoa
+{
+    string _nome;
+    int _idade;
+
+    internal Pessoa()
+    {
+        _nome = "";
+        _idade = 0;
+    }
+
+    internal Pessoa(string nome, int idade)
+    {
+        _nome = nome;
+        _idade = idade;
+    }
+
+    internal string Nome => _nome;
+    internal int Idade => _idade;
+
+    internal void ExibirDados() => Console.WriteLine($"Nome: {_nome}, Idade: {_idade}");
+}
+
+// Exercicio 4
+class Animal
+{
+    string _nome;
+    string _tipo;
+
+    static string ValidarTipo(string tipo)
+    {
+        string t = tipo.ToLower().Trim();
+        if (t == "cachorro" || t == "gato" || t == "peixe")
+            return char.ToUpper(t[0]) + t.Substring(1);
+        return "Peixe";
+    }
+
+    internal string Nome
+    {
+        get => _nome;
+        set => _nome = value;
+    }
+
+    internal string Tipo
+    {
+        get => _tipo;
+        set => _tipo = ValidarTipo(value);
+    }
+
+    internal Animal()
+    {
+        _nome = "";
+        _tipo = "Peixe";
+    }
+}
+
+class NivelMedio
+{
+    static void Main(string[] args)
+    {
+        // Exercicio 1
+        Console.Write("Base: ");
+        double b = double.Parse(Console.ReadLine()!);
+        Console.Write("Altura: ");
+        double h = double.Parse(Console.ReadLine()!);
+        Retangulo r = new Retangulo(b, h);
+        r.ExibirDados();
+
+        // Exercicio 2
+        Ponto p1 = new Ponto();
+        Ponto p2 = new Ponto(3.5, -2.0);
+        Ponto p3 = new Ponto(p2);
+        p1.Exibir();
+        p2.Exibir();
+        p3.Exibir();
+
+        // Exercicio 3
+        Pessoa[] pessoas = new Pessoa[3];
+        for (int i = 0; i < 3; i++)
+        {
+            Console.Write($"Nome da pessoa {i + 1}: ");
+            string nome = Console.ReadLine()!;
+            Console.Write($"Idade da pessoa {i + 1}: ");
+            int idade = int.Parse(Console.ReadLine()!);
+            pessoas[i] = new Pessoa(nome, idade);
+        }
+        Pessoa maisVelha = pessoas[0];
+        for (int i = 1; i < 3; i++)
+            if (pessoas[i].Idade > maisVelha.Idade)
+                maisVelha = pessoas[i];
+        Console.WriteLine($"Pessoa mais velha: {maisVelha.Nome} ({maisVelha.Idade} anos)");
+
+        // Exercicio 4
+        Animal[] animais = new Animal[5];
+        for (int i = 0; i < 5; i++)
+        {
+            animais[i] = new Animal();
+            Console.Write($"Nome do animal {i + 1}: ");
+            animais[i].Nome = Console.ReadLine()!;
+            Console.Write($"Tipo (cachorro/gato/peixe): ");
+            animais[i].Tipo = Console.ReadLine()!;
+        }
+        int cachorros = 0, gatos = 0, peixes = 0;
+        foreach (var a in animais)
+        {
+            if (a.Tipo == "Cachorro") cachorros++;
+            else if (a.Tipo == "Gato") gatos++;
+            else peixes++;
+        }
+        Console.WriteLine($"Cachorros: {cachorros}, Gatos: {gatos}, Peixes: {peixes}");
+    }
+}
+
+
+// Nivel Dificil
+using System;
+
+// Exercicio 1
+class Lampada
+{
+    bool _ligada;
+
+    internal bool Ligada => _ligada;
+
+    internal void Ligar() => _ligada = true;
+    internal void Desligar() => _ligada = false;
+
+    internal void ExibirEstado() =>
+        Console.WriteLine($"Lâmpada: {(_ligada ? "LIGADA" : "DESLIGADA")}");
+}
+
+class LampadaAvancada
+{
+    bool _ligada;
+    bool _queimada;
+    double _potencia;
+    double _voltagem;
+
+    static readonly Random _rng = new Random();
+
+    internal double Potencia
+    {
+        get => _potencia;
+        set => _potencia = value;
+    }
+
+    internal double Voltagem
+    {
+        get => _voltagem;
+        set => _voltagem = value;
+    }
+
+    internal bool Ligada => _ligada;
+    internal bool Queimada => _queimada;
+
+    internal LampadaAvancada(double potencia, double voltagem)
+    {
+        _potencia = potencia;
+        _voltagem = voltagem;
+    }
+
+    internal void Ligar()
+    {
+        if (_queimada)
+        {
+            Console.WriteLine("Lâmpada queimada, não pode ser ligada.");
+            return;
+        }
+        if (_rng.NextDouble() < 0.15)
+        {
+            _queimada = true;
+            _ligada = false;
+            Console.WriteLine("A lâmpada QUEIMOU ao ser ligada!");
+        }
+        else
+        {
+            _ligada = true;
+        }
+    }
+
+    internal void Desligar() => _ligada = false;
+
+    internal void ExibirEstado()
+    {
+        string estado = _queimada ? "QUEIMADA" : (_ligada ? "LIGADA" : "DESLIGADA");
+        Console.WriteLine($"Estado: {estado} | Potência: {_potencia}W | Voltagem: {_voltagem}V");
+    }
+}
+
+// Exercicio 2
+class Extrato
+{
+    DateTime _data;
+    double _valor;
+
+    internal Extrato(DateTime data, double valor)
+    {
+        _data = data;
+        _valor = valor;
+    }
+
+    internal void Exibir()
+    {
+        string tipo = _valor >= 0 ? "Depósito" : "Saque";
+        Console.WriteLine($"  [{_data:dd/MM/yyyy HH:mm}] {tipo}: R$ {Math.Abs(_valor):F2}");
+    }
+}
+
+class Cartao
+{
+    string _numero;
+    DateTime _validade;
+
+    internal Cartao(string numero, DateTime validade)
+    {
+        _numero = numero;
+        _validade = validade;
+    }
+
+    internal string Numero => _numero;
+    internal DateTime Validade => _validade;
+
+    internal bool EstaValido() => DateTime.Now <= _validade;
+}
+
+class Conta
+{
+    string _nomeCliente;
+    int _numero;
+    double _saldo;
+    Extrato[] _extratos;
+    int _totalExtratos;
+    Cartao? _cartao;
+
+    internal Conta(string nomeCliente, int numero, double saldoInicial)
+    {
+        _nomeCliente = nomeCliente;
+        _numero = numero;
+        _saldo = saldoInicial;
+        _extratos = new Extrato[1000];
+        _totalExtratos = 0;
+    }
+
+    internal string ObterNomeCliente() => _nomeCliente;
+    internal int ObterNumero() => _numero;
+    internal double ObterSaldo() => _saldo;
+
+    internal void Depositar(double valor)
+    {
+        if (valor <= 0) { Console.WriteLine("Valor inválido."); return; }
+        _saldo += valor;
+        RegistrarExtrato(valor);
+        Console.WriteLine($"Depósito de R$ {valor:F2} realizado. Saldo: R$ {_saldo:F2}");
+    }
+
+    internal void Sacar(double valor)
+    {
+        if (valor <= 0) { Console.WriteLine("Valor inválido."); return; }
+        if (valor > _saldo) { Console.WriteLine("Saldo insuficiente."); return; }
+        _saldo -= valor;
+        RegistrarExtrato(-valor);
+        Console.WriteLine($"Saque de R$ {valor:F2} realizado. Saldo: R$ {_saldo:F2}");
+    }
+
+    internal void SacarComCartao(double valor, string numeroCartao, DateTime validadeCartao)
+    {
+        if (_cartao == null)
+        {
+            Console.WriteLine("Esta conta não possui cartão.");
+            return;
+        }
+        if (_cartao.Numero != numeroCartao || _cartao.Validade.Month != validadeCartao.Month
+            || _cartao.Validade.Year != validadeCartao.Year)
+        {
+            Console.WriteLine("Cartão não reconhecido para esta conta.");
+            return;
+        }
+        if (!_cartao.EstaValido())
+        {
+            Console.WriteLine("Cartão vencido.");
+            return;
+        }
+        Sacar(valor);
+    }
+
+    internal void AssociarCartao(Cartao cartao) => _cartao = cartao;
+
+    internal void EmitirRelatorio()
+    {
+        Console.WriteLine($"  Conta: {_numero} | Titular: {_nomeCliente} | Saldo: R$ {_saldo:F2}");
+        Console.WriteLine("  Extrato:");
+        if (_totalExtratos == 0)
+        {
+            Console.WriteLine("    Nenhuma movimentação.");
+            return;
+        }
+        for (int i = 0; i < _totalExtratos; i++)
+            _extratos[i].Exibir();
+        if (_cartao != null)
+            Console.WriteLine($"  Cartão: {_cartao.Numero} | Validade: {_cartao.Validade:MM/yyyy}");
+    }
+
+    void RegistrarExtrato(double valor)
+    {
+        if (_totalExtratos < 1000)
+            _extratos[_totalExtratos++] = new Extrato(DateTime.Now, valor);
+    }
+}
+
+class NivelDificil
+{
+    static void Main(string[] args)
+    {
+        // Exercicio 1
+        Lampada lamp1 = new Lampada();
+        lamp1.ExibirEstado();
+        lamp1.Ligar();
+        lamp1.ExibirEstado();
+        lamp1.Desligar();
+        lamp1.ExibirEstado();
+
+        LampadaAvancada lamp2 = new LampadaAvancada(60, 127);
+        lamp2.ExibirEstado();
+        lamp2.Ligar();
+        lamp2.ExibirEstado();
 
         for (int i = 0; i < 10; i++)
         {
-            double m = double.Parse(Console.ReadLine());
-            double d = double.Parse(Console.ReadLine());
-            double x = double.Parse(Console.ReadLine());
-            double y = double.Parse(Console.ReadLine());
-            corpos[i] = new CorpoCeleste(m, d, x, y);
+            LampadaAvancada teste = new LampadaAvancada(100, 220);
+            teste.Ligar();
+            string res = teste.Queimada ? "queimou" : "funcionou";
+            Console.WriteLine($"Tentativa {i + 1}: {res}");
         }
 
-        CorpoCeleste maiorMassa = corpos[0];
-        CorpoCeleste maiorRaio = corpos[0];
-        double maiorDistanciaX = -1;
-        CorpoCeleste distante1 = null;
-        CorpoCeleste distante2 = null;
+        // Exercicio 2
+        Conta c1 = new Conta("Alice Silva", 1001, 500.00);
+        Conta c2 = new Conta("Bruno Costa", 1002, 1200.00);
+        Conta c3 = new Conta("Carla Mendes", 1003, 300.00);
 
-        for (int i = 0; i < corpos.Length; i++)
+        c1.AssociarCartao(new Cartao("1111-2222-3333-4444", new DateTime(2027, 12, 31)));
+        c2.AssociarCartao(new Cartao("5555-6666-7777-8888", new DateTime(2026, 6, 30)));
+        c3.AssociarCartao(new Cartao("9999-0000-1111-2222", new DateTime(2025, 1, 1)));
+
+        c1.Depositar(300.00);
+        c1.Sacar(100.00);
+        c1.SacarComCartao(50.00, "1111-2222-3333-4444", new DateTime(2027, 12, 31));
+
+        c2.Depositar(800.00);
+        c2.Sacar(500.00);
+        c2.SacarComCartao(200.00, "5555-6666-7777-8888", new DateTime(2026, 6, 30));
+
+        c3.Depositar(150.00);
+        c3.SacarComCartao(50.00, "9999-0000-1111-2222", new DateTime(2025, 1, 1));
+
+        foreach (Conta c in new[] { c1, c2, c3 })
         {
-            if (corpos[i].GetMassa() > maiorMassa.GetMassa())
-            {
-                maiorMassa = corpos[i];
-            }
-            if (corpos[i].CalcularRaio() > maiorRaio.CalcularRaio())
-            {
-                maiorRaio = corpos[i];
-            }
-            for (int j = i + 1; j < corpos.Length; j++)
-            {
-                double distanciaX = Math.Abs(corpos[i].GetPosicaoX() - corpos[j].GetPosicaoX());
-                if (distanciaX > maiorDistanciaX)
-                {
-                    maiorDistanciaX = distanciaX;
-                    distante1 = corpos[i];
-                    distante2 = corpos[j];
-                }
-            }
+            Console.WriteLine("---------------------------");
+            c.EmitirRelatorio();
         }
     }
 }
