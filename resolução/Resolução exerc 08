@@ -1,16 +1,18 @@
-import java.util.Scanner;
+using System;
 
-public class Fibonacci {
-    public static void main(String[] args) {
-        Scanner teclado = new Scanner(System.in);
-        System.out.print("Informe um número inteiro não negativo: ");
-        int n = teclado.nextInt();
+public class Fibonacci
+{
+    public static void Main(string[] args)
+    {
+        Console.Write("Informe um número inteiro não negativo: ");
+        int n = int.Parse(Console.ReadLine());
 
         int f0 = 0, f1 = 1;
 
-        System.out.print("Série: ");
-        for (int i = 0; i <= n; i++) {
-            System.out.print(f0 + (i == n ? "" : ", "));
+        Console.Write("Série: ");
+        for (int i = 0; i <= n; i++)
+        {
+            Console.Write(f0 + (i == n ? "" : ", "));
             
             // Lógica de troca para o próximo termo
             int proximo = f0 + f1;
