@@ -6,38 +6,38 @@ Por exemplo, caso o usuário deseje investir R$ 100,00 por mês, e tenha uma tax
 Saldo do investimento após 1 ano: 1280.9328043328942
 Deseja processar mais um ano? (S/N)
 
-import java.util.Scanner;
+using System;
 
-public class Investimento {
-    public static void main(String[] args) {
-        Scanner scanner = new Scanner(System.in);
+public class Investimento
+{
+    public static void Main(string[] args)
+    {
+        Console.Write("Informe o valor a ser investido por mês: ");
+        double aporteMensal = double.Parse(Console.ReadLine());
         
-        System.out.print("Informe o valor a ser investido por mês: ");
-        double aporteMensal = scanner.nextDouble();
-        
-        System.out.print("Informe a taxa de juros mensal (em %): ");
-        double taxaJuros = scanner.nextDouble();
+        Console.Write("Informe a taxa de juros mensal (em %): ");
+        double taxaJuros = double.Parse(Console.ReadLine());
         double taxaDecimal = taxaJuros / 100.0;
         
         double saldo = 0.0;
         int anosCalculados = 0;
         char continuar = 'S';
         
-        do {
+        do
+        {
             anosCalculados++;
             
-            for (int mes = 1; mes <= 12; mes++) {
+            for (int mes = 1; mes <= 12; mes++)
+            {
                 saldo = saldo + aporteMensal; // Adiciona o investimento do mês
                 saldo = saldo + (saldo * taxaDecimal); // Aplica o rendimento sobre o saldo total
             }
             
-            System.out.println("Saldo do investimento após " + anosCalculados + " ano(s): " + saldo);
+            Console.WriteLine("Saldo do investimento após " + anosCalculados + " ano(s): " + saldo);
             
-            System.out.print("Deseja processar mais um ano? (S/N): ");
-            continuar = scanner.next().toUpperCase().charAt(0);
+            Console.Write("Deseja processar mais um ano? (S/N): ");
+            continuar = Console.ReadLine().ToUpper()[0];
             
         } while (continuar == 'S');
-        
-        scanner.close();
     }
 }
