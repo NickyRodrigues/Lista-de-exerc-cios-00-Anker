@@ -39,4 +39,4 @@ public class CalculoDesconto
         Console.WriteLine("Produto: " + nome);
         Console.Write($"Valor total a ser pago: R$ {valorFinal:F2}");
     }
-}
+ }
