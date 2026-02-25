@@ -5,7 +5,7 @@ public class HelloWorld
     public static void Main(string[] args)
     {
         int linhas = 10;
-        int colunas = 1;
+        int colunas = 10;
         
         for(int row = 1; row <= linhas; row++)
         {
