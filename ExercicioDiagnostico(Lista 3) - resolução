@@ -98,9 +98,9 @@ class CorpoCeleste
     }
 }
 
-class Program
+public class Program
 {
-    private static void Main(string[] args)
+    public static void Main(string[] args)
     {
         CorpoCeleste[] corpos = new CorpoCeleste[10];
 
